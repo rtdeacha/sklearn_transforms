@@ -17,7 +17,7 @@ class DropColumns(BaseEstimator, TransformerMixin):
     
     
 
-class over_under(TransformerMixin, BaseEstimator):
+class OverUnder(TransformerMixin, BaseEstimator):
     def __init__(self, columns):
         self.columns = columns
 
