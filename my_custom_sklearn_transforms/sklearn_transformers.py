@@ -27,7 +27,7 @@ class OverUnder(TransformerMixin, BaseEstimator):
     def transform(self, X):
         return self
     
-    def fit_transform(self, X):
+    def fit_transform(self, X, y=None):
         
         features = X.iloc[:,:-1]
         target = X.iloc[:,-1]
