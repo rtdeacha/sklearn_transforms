@@ -21,8 +21,20 @@ class OverUnder(TransformerMixin, BaseEstimator):
     def __init__(self, columns):
         self.columns = columns
 
-    def fit(self, X):
-        return self
+    def fit(self, X, y=None):
+    
+        features = X
+        target = y
+        
+        # Primero hacemos over sobre la variable minoritaria
+        over = SMOTE()
+        features, target = over.fit_resample(features,target)
+        
+        # Luego hacemos under sobre la variable mayoritaria
+        under = RandomUnderSampler()
+        features, target = under.fit_resample(features,target)
+
+        return features, target
     
     def transform(self, X):
         return self
@@ -31,6 +43,7 @@ class OverUnder(TransformerMixin, BaseEstimator):
         
         features = X.iloc[:,:-1]
         target = X.iloc[:,-1]
+        
         # Primero hacemos over sobre la variable minoritaria
         over = SMOTE()
         features, target = over.fit_resample(features,target)
